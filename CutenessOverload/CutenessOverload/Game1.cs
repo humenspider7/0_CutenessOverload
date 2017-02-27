@@ -24,6 +24,7 @@ namespace CutenessOverload
         Texture2D background;  // This is a Texture2D object that will hold the background picture
         Texture2D superDogSheet;  // What's supdog?
         Sprite superdog;  // We will load a superdog image into this sprite and make him do awesome things!
+        Sprite superdog2; //PART 1
 
         public Game1()
         {
@@ -62,9 +63,14 @@ namespace CutenessOverload
             superDogSheet = Content.Load<Texture2D>("superdog");
 
             superdog = new Sprite(new Vector2(-150, 30), // Start at x=-150, y=30
-                                  superDogSheet, 
+                                  superDogSheet,
                                   new Rectangle(164, 0, 163, 147), // Use this part of the superdog texture
                                   new Vector2(60, 20));
+            superdog2 = new Sprite(new Vector2(-150, 30), // Start at x=-150, y=30
+                                  superDogSheet,
+                                  new Rectangle(164, 0, 163, 147), // Use this part of the superdog texture
+                                  new Vector2(6, 2));
+            //PART 2
 
             // Add any other initialization code here
         }
@@ -88,9 +94,12 @@ namespace CutenessOverload
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            
+            superdog.Rotation =  superdog.Rotation + 0.1f;
+            superdog2.Rotation = superdog2.Rotation + 0.1f;
             // TODO: Add your update logic here
             superdog.Update(gameTime);  // Update the superdog so he moves
+            superdog2.Update(gameTime);
+            //PART 3
 
             base.Update(gameTime);
         }
@@ -108,6 +117,8 @@ namespace CutenessOverload
             // TODO: Add your drawing code here
             spriteBatch.Draw(background, new Rectangle(0,0,this.Window.ClientBounds.Width,this.Window.ClientBounds.Height), Color.White); // Draw the background at (0,0) - no crazy tinting
             superdog.Draw(spriteBatch);  // Draw the superdog!
+            superdog2.Draw(spriteBatch);
+            //PART 4
 
             spriteBatch.End();
 
