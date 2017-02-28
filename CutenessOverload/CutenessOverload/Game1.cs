@@ -22,11 +22,22 @@ namespace CutenessOverload
         // Define all the variables you want to use here
 
         Texture2D bank;  // This is a Texture2D object that will hold the background picture
-        Texture2D superDogSheet;  // What's supdog?
+        //Texture2D superDogSheet;  // What's supdog?
         Texture2D dallasTexture;
-        Sprite superdog;  // We will load a superdog image into this sprite and make him do awesome things!
-        Sprite superdog2; //PART 1
+        Texture2D chainsTexture;
+        Texture2D wolfTexture;
+        Texture2D hoxtonTexture;
+        Texture2D cloakerTexture;
+
+        //Sprite superdog;  // We will load a superdog image into this sprite and make him do awesome things!
+       
+        //PART 1
+
         Sprite dallas;
+        Sprite chains;
+        Sprite wolf;
+        Sprite hoxton;
+        Sprite cloaker;
 
         public Game1()
         {
@@ -61,22 +72,48 @@ namespace CutenessOverload
                                                                  // texture.. note that under the properties for 
                                                                  // background.jpg in the Solution explorer you 
                                                                  // should see that it has the asset name of "background"
+            //superDogSheet = Content.Load<Texture2D>("superdog");
 
-            superDogSheet = Content.Load<Texture2D>("superdog");
             dallasTexture = Content.Load<Texture2D>("Dallas");
+            chainsTexture = Content.Load<Texture2D>("Chains");
+            wolfTexture = Content.Load<Texture2D>("Wolf");
+            hoxtonTexture = Content.Load<Texture2D>("Hoxton");
+            cloakerTexture = Content.Load<Texture2D>("Cloaker");
 
-            superdog = new Sprite(new Vector2(-150, 30), // Start at x=-150, y=30
-                                  superDogSheet,
-                                  new Rectangle(164, 0, 163, 147), // Use this part of the superdog texture
-                                  new Vector2(60, 20));
-            superdog2 = new Sprite(new Vector2(-150, 30), // Start at x=-150, y=30
-                                  superDogSheet,
-                                  new Rectangle(164, 0, 163, 147), // Use this part of the superdog texture
-                                  new Vector2(6, 2));
+            //superdog = new Sprite(new Vector2(-150, 30), // Start at x=-150, y=30
+                                  //superDogSheet,
+                                 // new Rectangle(164, 0, 163, 147), // Use this part of the superdog texture
+                                  //new Vector2(60, 20));
+            
             dallas = new Sprite(new Vector2(-150, 30), // Start at x=-150, y=30
                                   dallasTexture,
                                   new Rectangle(1, 1, 149, 219), // Use this part of the superdog texture (start x, start y, width, height)
-                                  new Vector2(60, 20));
+                                  new Vector2(60, 0));
+
+            wolf = new Sprite(new Vector2(350, 30), // Start at x=-150, y=30
+                                  wolfTexture,
+                                  new Rectangle(7, 2, 128, 163), // Use this part of the superdog texture (start x, start y, width, height)
+                                  new Vector2(90, 90));
+
+            chains = new Sprite(new Vector2(150, 30), // Start at x=-150, y=30
+                                 chainsTexture,
+                                  new Rectangle(9, 20, 129, 170), // Use this part of the superdog texture (start x, start y, width, height)
+                                  new Vector2(90, 0));
+
+            hoxton = new Sprite(new Vector2(50, 30), // Start at x=-150, y=30
+                                 hoxtonTexture,
+                                  new Rectangle(0, 0, 149, 161), // Use this part of the superdog texture (start x, start y, width, height)
+                                  new Vector2(90, 0));
+
+            cloaker = new Sprite(new Vector2(0, 30), // Start at x=-150, y=30
+                                 cloakerTexture,
+                                  new Rectangle(0, 0, 157, 160), // Use this part of the superdog texture (start x, start y, width, height)
+                                  new Vector2(90, 0));
+
+
+
+
+
             //PART 2
 
             // Add any other initialization code here
@@ -101,13 +138,16 @@ namespace CutenessOverload
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            superdog.Rotation =  superdog.Rotation + 0.1f;
-            superdog2.Rotation = superdog2.Rotation + 0.1f;
-            dallas.Rotation = dallas.Rotation + 0.1f;
+            //superdog.Rotation =  superdog.Rotation + 0.1f;
+            
             // TODO: Add your update logic here
-            superdog.Update(gameTime);  // Update the superdog so he moves
-            superdog2.Update(gameTime);
+            //superdog.Update(gameTime);  // Update the superdog so he moves
+            
             dallas.Update(gameTime);
+            chains.Update(gameTime);
+            wolf.Update(gameTime);
+            hoxton.Update(gameTime);
+            cloaker.Update(gameTime);
             //PART 3
 
             base.Update(gameTime);
@@ -125,9 +165,14 @@ namespace CutenessOverload
 
             // TODO: Add your drawing code here
             spriteBatch.Draw(bank, new Rectangle(0,0,this.Window.ClientBounds.Width,this.Window.ClientBounds.Height), Color.White); // Draw the background at (0,0) - no crazy tinting
-            superdog.Draw(spriteBatch);  // Draw the superdog!
-            superdog2.Draw(spriteBatch);
+            //superdog.Draw(spriteBatch);  // Draw the superdog!
+           
             dallas.Draw(spriteBatch);
+            chains.Draw(spriteBatch);
+            wolf.Draw(spriteBatch);
+            hoxton.Draw(spriteBatch);
+            cloaker.Draw(spriteBatch);
+            
             //PART 4
 
             spriteBatch.End();
