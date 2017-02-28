@@ -21,10 +21,12 @@ namespace CutenessOverload
 
         // Define all the variables you want to use here
 
-        Texture2D background;  // This is a Texture2D object that will hold the background picture
+        Texture2D bank;  // This is a Texture2D object that will hold the background picture
         Texture2D superDogSheet;  // What's supdog?
+        Texture2D dallasTexture;
         Sprite superdog;  // We will load a superdog image into this sprite and make him do awesome things!
         Sprite superdog2; //PART 1
+        Sprite dallas;
 
         public Game1()
         {
@@ -55,12 +57,13 @@ namespace CutenessOverload
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            background = Content.Load<Texture2D>("background");  // Load the background picture file into the 
+            bank = Content.Load<Texture2D>("bank");  // Load the background picture file into the 
                                                                  // texture.. note that under the properties for 
                                                                  // background.jpg in the Solution explorer you 
                                                                  // should see that it has the asset name of "background"
 
             superDogSheet = Content.Load<Texture2D>("superdog");
+            dallasTexture = Content.Load<Texture2D>("Dallas");
 
             superdog = new Sprite(new Vector2(-150, 30), // Start at x=-150, y=30
                                   superDogSheet,
@@ -70,6 +73,10 @@ namespace CutenessOverload
                                   superDogSheet,
                                   new Rectangle(164, 0, 163, 147), // Use this part of the superdog texture
                                   new Vector2(6, 2));
+            dallas = new Sprite(new Vector2(-150, 30), // Start at x=-150, y=30
+                                  dallasTexture,
+                                  new Rectangle(1, 1, 149, 219), // Use this part of the superdog texture (start x, start y, width, height)
+                                  new Vector2(60, 20));
             //PART 2
 
             // Add any other initialization code here
@@ -96,9 +103,11 @@ namespace CutenessOverload
                 this.Exit();
             superdog.Rotation =  superdog.Rotation + 0.1f;
             superdog2.Rotation = superdog2.Rotation + 0.1f;
+            dallas.Rotation = dallas.Rotation + 0.1f;
             // TODO: Add your update logic here
             superdog.Update(gameTime);  // Update the superdog so he moves
             superdog2.Update(gameTime);
+            dallas.Update(gameTime);
             //PART 3
 
             base.Update(gameTime);
@@ -115,9 +124,10 @@ namespace CutenessOverload
             spriteBatch.Begin();
 
             // TODO: Add your drawing code here
-            spriteBatch.Draw(background, new Rectangle(0,0,this.Window.ClientBounds.Width,this.Window.ClientBounds.Height), Color.White); // Draw the background at (0,0) - no crazy tinting
+            spriteBatch.Draw(bank, new Rectangle(0,0,this.Window.ClientBounds.Width,this.Window.ClientBounds.Height), Color.White); // Draw the background at (0,0) - no crazy tinting
             superdog.Draw(spriteBatch);  // Draw the superdog!
             superdog2.Draw(spriteBatch);
+            dallas.Draw(spriteBatch);
             //PART 4
 
             spriteBatch.End();
