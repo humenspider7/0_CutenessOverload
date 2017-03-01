@@ -18,6 +18,8 @@ namespace CutenessOverload
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SoundEffect sfxchains, sfxcloaker;
+        Song backgroundm;
 
         // Define all the variables you want to use here
 
@@ -28,6 +30,11 @@ namespace CutenessOverload
         Texture2D wolfTexture;
         Texture2D hoxtonTexture;
         Texture2D cloakerTexture;
+
+        double timer = 0;
+
+        bool chainsPlayed = false;
+        bool cloakerPlayed = false;
 
         //Sprite superdog;  // We will load a superdog image into this sprite and make him do awesome things!
        
@@ -80,12 +87,20 @@ namespace CutenessOverload
             hoxtonTexture = Content.Load<Texture2D>("Hoxton");
             cloakerTexture = Content.Load<Texture2D>("Cloaker");
 
+            sfxchains = Content.Load<SoundEffect>("Chains SE");
+            sfxcloaker = Content.Load<SoundEffect>("Cloaker 1 SE");
+
+            backgroundm = Content.Load<Song>("icefront");
+
+            MediaPlayer.Play(backgroundm);
+            
+
             //superdog = new Sprite(new Vector2(-150, 30), // Start at x=-150, y=30
                                   //superDogSheet,
                                  // new Rectangle(164, 0, 163, 147), // Use this part of the superdog texture
                                   //new Vector2(60, 20));
             
-            dallas = new Sprite(new Vector2(-150, 30), // Start at x=-150, y=30
+            dallas = new Sprite(new Vector2(0, 630), // Start at x=-150, y=30
                                   dallasTexture,
                                   new Rectangle(1, 1, 149, 219), // Use this part of the superdog texture (start x, start y, width, height)
                                   new Vector2(60, 0));
@@ -135,6 +150,20 @@ namespace CutenessOverload
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            timer += gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (timer > 3 && !chainsPlayed)
+            {
+                sfxchains.Play();
+                chainsPlayed = true;
+            }
+
+            if (timer > 5 && !cloakerPlayed)
+            {
+                sfxcloaker.Play();
+                cloakerPlayed = true;
+            }
+
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
