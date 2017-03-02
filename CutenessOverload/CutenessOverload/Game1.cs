@@ -18,7 +18,7 @@ namespace CutenessOverload
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        SoundEffect sfxchains, sfxcloaker;
+        SoundEffect sfxdallas, sfxchains, sfxwolf, sfxhoxton, sfxcloaker, sfxcloaker1;
         Song backgroundm;
 
         // Define all the variables you want to use here
@@ -33,8 +33,14 @@ namespace CutenessOverload
 
         double timer = 0;
 
+        bool dallasPlayed = false;
         bool chainsPlayed = false;
+        bool wolfPlayed = false;
+        bool hoxtonPlayed = false;
+
         bool cloakerPlayed = false;
+        bool cloaker1Played = false;
+       
 
         //Sprite superdog;  // We will load a superdog image into this sprite and make him do awesome things!
        
@@ -87,8 +93,11 @@ namespace CutenessOverload
             hoxtonTexture = Content.Load<Texture2D>("Hoxton");
             cloakerTexture = Content.Load<Texture2D>("Cloaker");
 
+            sfxdallas = Content.Load<SoundEffect>("Dallas SE");
             sfxchains = Content.Load<SoundEffect>("Chains SE");
             sfxcloaker = Content.Load<SoundEffect>("Cloaker 1 SE");
+            sfxwolf = Content.Load<SoundEffect>("Wolf SE");
+            sfxcloaker1 = Content.Load<SoundEffect>("Cloaker 2 SE");
 
             backgroundm = Content.Load<Song>("icefront");
 
@@ -100,30 +109,30 @@ namespace CutenessOverload
                                  // new Rectangle(164, 0, 163, 147), // Use this part of the superdog texture
                                   //new Vector2(60, 20));
             
-            dallas = new Sprite(new Vector2(0, 630), // Start at x=-150, y=30
+            dallas = new Sprite(new Vector2(80, 0), // Start at x=-150, y=30
                                   dallasTexture,
                                   new Rectangle(1, 1, 149, 219), // Use this part of the superdog texture (start x, start y, width, height)
-                                  new Vector2(60, 0));
+                                  new Vector2(0, 100)); //SPEED
 
-            wolf = new Sprite(new Vector2(350, 30), // Start at x=-150, y=30
+            wolf = new Sprite(new Vector2(280, 0), // Start at x=-150, y=30
                                   wolfTexture,
                                   new Rectangle(7, 2, 128, 163), // Use this part of the superdog texture (start x, start y, width, height)
-                                  new Vector2(90, 90));
+                                  new Vector2(0, 80));
 
-            chains = new Sprite(new Vector2(150, 30), // Start at x=-150, y=30
+            chains = new Sprite(new Vector2(480, 0), // Start at x=-150, y=30
                                  chainsTexture,
                                   new Rectangle(9, 20, 129, 170), // Use this part of the superdog texture (start x, start y, width, height)
-                                  new Vector2(90, 0));
+                                  new Vector2(0, 60));
 
-            hoxton = new Sprite(new Vector2(50, 30), // Start at x=-150, y=30
+            hoxton = new Sprite(new Vector2(680, 0), // Start at x=-150, y=30
                                  hoxtonTexture,
                                   new Rectangle(0, 0, 149, 161), // Use this part of the superdog texture (start x, start y, width, height)
-                                  new Vector2(90, 0));
+                                  new Vector2(0, 40));
 
-            cloaker = new Sprite(new Vector2(0, 30), // Start at x=-150, y=30
+            cloaker = new Sprite(new Vector2(680, 400), // Start at x=-150, y=30
                                  cloakerTexture,
                                   new Rectangle(0, 0, 157, 160), // Use this part of the superdog texture (start x, start y, width, height)
-                                  new Vector2(90, 0));
+                                  new Vector2(0, -20));
 
 
 
@@ -152,17 +161,42 @@ namespace CutenessOverload
         {
             timer += gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (timer > 3 && !chainsPlayed)
+
+            if (timer > 1 && !dallasPlayed)
             {
-                sfxchains.Play();
-                chainsPlayed = true;
+                sfxdallas.Play();
+                dallasPlayed = true;
             }
 
-            if (timer > 5 && !cloakerPlayed)
+            if (timer > 5 && !wolfPlayed)
+            {
+                sfxchains.Play();
+                wolfPlayed = true;
+            }
+
+            if (timer > 9 && !chainsPlayed)
+            {
+                sfxcloaker.Play();
+                chainsPlayed = true;
+            }
+            if (timer > 13 && !hoxtonPlayed)
+            {
+                sfxhoxton.Play();
+                hoxtonPlayed = true;
+            }
+
+            if (timer > 17 && !cloakerPlayed)
             {
                 sfxcloaker.Play();
                 cloakerPlayed = true;
             }
+
+            if (timer > 21 && !cloaker1Played)
+            {
+                sfxcloaker1.Play();
+                cloaker1Played = true;
+            }
+
 
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
